@@ -121,7 +121,7 @@ const Products = () => {
                   alt="Card"
                   height={300}
                 />
-                <div className="card-body">
+                <div>
                   <h5 className="bad-title">
                     {product.title.substring(0, 12)}...
                   </h5>
@@ -167,7 +167,7 @@ const Products = () => {
             <hr />
           </div>
         </div>
-        <div className="row justify-content-center">
+        <div className="row">
           {loading ? <Loading /> : <ShowProducts />}
         </div>
       </div>
