@@ -112,7 +112,7 @@ const Products = () => {
             <div
               id={product.id}
               key={product.id}
-              className="col-md-4 col-sm-6 col-xs-8"
+              className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
             >
               <div className="card text-center h-100" key={product.id}>
                 <img
@@ -167,7 +167,7 @@ const Products = () => {
             <hr />
           </div>
         </div>
-        <div className="row">
+        <div className="broww">
           {loading ? <Loading /> : <ShowProducts />}
         </div>
       </div>
