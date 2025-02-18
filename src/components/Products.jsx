@@ -112,7 +112,7 @@ const Products = () => {
             <div
               id={product.id}
               key={product.id}
-              className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
+              className="col-md-4 col-sm-6 col-xs-8"
             >
               <div className="card text-center h-100" key={product.id}>
                 <img
@@ -130,7 +130,7 @@ const Products = () => {
                   </p>
                 </div>
                 <ul className="list-group list-group-flush">
-                  <li className="list-group-item lead">$ {product.price}</li>
+                  <li>$ {product.price}</li>
                   {/* <li className="list-group-item">Dapibus ac facilisis in</li>
                     <li className="list-group-item">Vestibulum at eros</li> */}
                 </ul>
