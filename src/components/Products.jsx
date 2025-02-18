@@ -167,9 +167,9 @@ const Products = () => {
             <hr />
           </div>
         </div>
-        <div className="broww">
+        <section>
           {loading ? <Loading /> : <ShowProducts />}
-        </div>
+        </section>
       </div>
     </>
   );
