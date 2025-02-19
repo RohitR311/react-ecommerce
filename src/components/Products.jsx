@@ -121,16 +121,16 @@ const Products = () => {
                   alt="Card"
                   height={300}
                 />
-                <div>
-                  <h5 className="saddest-title">
+                <div className="card-body">
+                  <h5 className="card-title">
                     {product.title.substring(0, 12)}...
                   </h5>
-                  <p className="saddest-text">
+                  <p className="card-text">
                     {product.description.substring(0, 90)}...
                   </p>
                 </div>
                 <ul className="list-group list-group-flush">
-                  <li>$ {product.price}</li>
+                  <li className="list-group-item lead">$ {product.price}</li>
                   {/* <li className="list-group-item">Dapibus ac facilisis in</li>
                     <li className="list-group-item">Vestibulum at eros</li> */}
                 </ul>
@@ -167,9 +167,9 @@ const Products = () => {
             <hr />
           </div>
         </div>
-        <section>
+        <div className="row justify-content-center">
           {loading ? <Loading /> : <ShowProducts />}
-        </section>
+        </div>
       </div>
     </>
   );
