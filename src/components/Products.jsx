@@ -112,7 +112,7 @@ const Products = () => {
             <div
               id={product.id}
               key={product.id}
-              className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
+              className="col-md-4 karishma rohit"
             >
               <div className="card text-center h-100" key={product.id}>
                 <img
@@ -121,20 +121,20 @@ const Products = () => {
                   alt="Card"
                   height={300}
                 />
-                <div className="bad-body">
-                  <h5 className="bard-title">
+                <div id="card-id">
+                  <h5 href='/abc' className="bad-cat">
                     {product.title.substring(0, 12)}...
                   </h5>
-                  <p className="cat-text">
+                  <p className="cat">
                     {product.description.substring(0, 90)}...
                   </p>
                 </div>
-                <ul className="list-group">
-                  <li>$ {product.price}</li>
+                <ul id="new-test" className="list-group">
+                  <li className="list-group-item">$ {product.price}</li>
                   {/* <li className="list-group-item">Dapibus ac facilisis in</li>
                     <li className="list-group-item">Vestibulum at eros</li> */}
                 </ul>
-                <div className="bad-body">
+                <div className="bad rohitcool" id="news">
                   <Link
                     to={"/product/" + product.id}
                     className="btn-dark m-1"
@@ -142,7 +142,7 @@ const Products = () => {
                     Buy Now
                   </Link>
                   <button
-                    className="btn m-1"
+                    id="btn-id"
                     onClick={() => {
                       toast.success("Added to cart");
                       addProduct(product);
