@@ -110,11 +110,10 @@ const Products = () => {
         {filter.map((product) => {
           return (
             <div
-              id={Math.random().toString()}
               key={product.id}
               className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
             >
-              <div id="cards" key={product.id}>
+              <div className="card text-center h-100" key={product.id}>
                 <img
                   className="card-img-top p-3"
                   src={product.image}
@@ -122,10 +121,10 @@ const Products = () => {
                   height={300}
                 />
                 <div className="bad-body">
-                  <h5 id="title">
+                  <h5 className="bard-title">
                     {product.title.substring(0, 12)}...
                   </h5>
-                  <p id="cats">
+                  <p className="cat-text">
                     {product.description.substring(0, 90)}...
                   </p>
                 </div>
