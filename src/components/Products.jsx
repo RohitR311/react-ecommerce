@@ -110,8 +110,9 @@ const Products = () => {
         {filter.map((product) => {
           return (
             <div
+              id={product.id}
               key={product.id}
-              className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
+              // className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
             >
               <div className="card text-center h-100" key={product.id}>
                 <img
@@ -121,10 +122,10 @@ const Products = () => {
                   height={300}
                 />
                 <div className="bad-body">
-                  <h5 className="bard-title">
+                  <h5>
                     {product.title.substring(0, 12)}...
                   </h5>
-                  <p className="cat-text">
+                  <p>
                     {product.description.substring(0, 90)}...
                   </p>
                 </div>
