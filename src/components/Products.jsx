@@ -114,7 +114,7 @@ const Products = () => {
               key={product.id}
               className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
             >
-              <div id="cards" className="card text-center h-100" key={product.id}>
+              <div id="cards" key={product.id}>
                 <img
                   className="card-img-top p-3"
                   src={product.image}
@@ -122,10 +122,10 @@ const Products = () => {
                   height={300}
                 />
                 <div className="bad-body">
-                  <h5 id="title" className="bard-title">
+                  <h5 id="title">
                     {product.title.substring(0, 12)}...
                   </h5>
-                  <p id="cats" className="cat-text">
+                  <p id="cats">
                     {product.description.substring(0, 90)}...
                   </p>
                 </div>
