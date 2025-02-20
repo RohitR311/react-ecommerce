@@ -122,7 +122,7 @@ const Products = () => {
                   height={300}
                 />
                 <div className="bad-body">
-                  <h5 className="bard-title">
+                  <h5 id="title" className="bard-title">
                     {product.title.substring(0, 12)}...
                   </h5>
                   <p id="cats" className="cat-text">
