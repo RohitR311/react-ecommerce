@@ -112,35 +112,63 @@ const Products = () => {
             <div
               id={product.id}
               key={product.id}
-              className="product-card featured-item col-md-4 col-sm-6 col-12 mb-4" // Added classes
+              className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
             >
-              <div className="card shadow text-center h-100" key={product.id}> {/* Added shadow class */}
+              {/* Added badge element */}
+              {product.isNew && <span className="badge bg-success position-absolute top-0 end-0 m-2">New</span>}
+              
+              <div className="card text-center h-100" key={product.id}>
+                {/* Added favorite button */}
+                <button className="btn-favorite position-absolute top-0 start-0 m-2">
+                  <i className="fa fa-heart"></i>
+                </button>
+                
                 <img
-                  className="card-img-top p-3 img-fluid rounded" // Added classes
+                  className="card-img-top p-3"
                   src={product.image}
                   alt="Card"
                   height={300}
                 />
-                <div className="card-body p-3"> {/* Changed class completely */}
-                  <h5 className="card-title text-primary fw-bold"> {/* Completely changed classes */}
+                
+                {/* Added rating stars */}
+                <div className="rating mb-2">
+                  <span className="star">★</span>
+                  <span className="star">★</span>
+                  <span className="star">★</span>
+                  <span className="star">★</span>
+                  <span className="star-empty">☆</span>
+                  <span className="rating-count">(42)</span>
+                </div>
+                
+                <div className="bad-body">
+                  <h5 className="bard-title">
                     {product.title.substring(0, 12)}...
+                    {/* Added tooltip */}
+                    <span className="tooltip-icon ms-1" title={product.title}>ⓘ</span>
                   </h5>
-                  <p className="card-text text-muted small"> {/* Completely changed classes */}
+                  <p className="cat-text">
                     {product.description.substring(0, 90)}...
                   </p>
+                  
+                  {/* Added category tag */}
+                  <span className="category-tag">{product.category}</span>
                 </div>
-                <ul className="list-group list-group-flush border-top"> {/* Added classes */}
-                  <li className="list-group-item text-success fw-bold">$ {product.price}</li> {/* Added classes */}
+                
+                <ul className="list-group">
+                  <li>$ {product.price}</li>
+                  {/* Removed commented list items, added actual discount item */}
+                  <li className="list-group-item text-danger">Save 15%</li>
                 </ul>
-                <div className="card-footer bg-light d-flex justify-content-between"> {/* Changed class completely */}
+                
+                <div className="bad-body">
                   <Link
                     to={"/product/" + product.id}
-                    className="btn btn-dark btn-sm" // Changed classes
+                    className="btn-dark m-1"
                   >
                     Buy Now
                   </Link>
                   <button
-                    className="btn btn-outline-primary btn-sm" // Changed classes
+                    className="btn m-1"
                     onClick={() => {
                       toast.success("Added to cart");
                       addProduct(product);
@@ -148,6 +176,17 @@ const Products = () => {
                   >
                     Add to Cart
                   </button>
+                  
+                  {/* Added wishlist button */}
+                  <button className="btn-wishlist m-1">Save for later</button>
+                </div>
+                
+                {/* Added stock indicator */}
+                <div className="stock-status">
+                  {product.inStock ? 
+                    <span className="in-stock">In Stock</span> : 
+                    <span className="out-of-stock">Out of Stock</span>
+                  }
                 </div>
               </div>
             </div>
