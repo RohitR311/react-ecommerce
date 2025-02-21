@@ -1,7 +1,7 @@
 {
   "files": {
     "main.css": "/react-ecommerce/static/css/main.2a094407.css",
-    "main.js": "/react-ecommerce/static/js/main.418caa17.js",
+    "main.js": "/react-ecommerce/static/js/main.fb789a89.js",
     "static/media/fontawesome-webfont.svg?v=4.7.0": "/react-ecommerce/static/media/fontawesome-webfont.c1e38fd9e0e74ba58f7a.svg",
     "static/media/fontawesome-webfont.eot": "/react-ecommerce/static/media/fontawesome-webfont.8b43027f47b20503057d.eot",
     "static/media/fontawesome-webfont.ttf?v=4.7.0": "/react-ecommerce/static/media/fontawesome-webfont.1e59d2330b4c6deb84b3.ttf",
@@ -9,10 +9,10 @@
     "static/media/fontawesome-webfont.woff2?v=4.7.0": "/react-ecommerce/static/media/fontawesome-webfont.20fd1704ea223900efa9.woff2",
     "index.html": "/react-ecommerce/index.html",
     "main.2a094407.css.map": "/react-ecommerce/static/css/main.2a094407.css.map",
-    "main.418caa17.js.map": "/react-ecommerce/static/js/main.418caa17.js.map"
+    "main.fb789a89.js.map": "/react-ecommerce/static/js/main.fb789a89.js.map"
   },
   "entrypoints": [
     "static/css/main.2a094407.css",
-    "static/js/main.418caa17.js"
+    "static/js/main.fb789a89.js"
   ]
 }

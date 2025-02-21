@@ -109,7 +109,7 @@ const Products = () => {
 
         {filter.map((product) => {
           return (
-            <div
+            <section // Changed from div to section
               id={product.id}
               key={product.id}
               className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
@@ -122,17 +122,15 @@ const Products = () => {
                   height={300}
                 />
                 <div className="bad-body">
-                  <h5 className="bard-title"> 
+                  <h3 className="bard-title"> {/* Changed from h5 to h3 */}
                     {product.title.substring(0, 12)}...
-                  </h5>
-                  <p className="cat-text">
+                  </h3>
+                  <span className="cat-text"> {/* Changed from p to span */}
                     {product.description.substring(0, 90)}...
-                  </p>
+                  </span>
                 </div>
                 <ul className="list-group">
                   <li>$ {product.price}</li>
-                  {/* <li className="list-group-item">Dapibus ac facilisis in</li>
-                    <li className="list-group-item">Vestibulum at eros</li> */}
                 </ul>
                 <div className="bad-body">
                   <Link
@@ -152,7 +150,7 @@ const Products = () => {
                   </button>
                 </div>
               </div>
-            </div>
+            </section>
           );
         })}
       </>
