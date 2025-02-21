@@ -107,134 +107,168 @@ const Products = () => {
           </button>
         </div>
 
-        {filter.map((product) => {
+        {filter.map((product, index) => {
+          const isEven = index % 2 === 0;
           return (
-            <div
-              id={product.id}
-              key={product.id}
-              className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
+            <article // Changed from div to article
+              id={`product-card-${product.id}`} // Changed id format
+              key={`${product.category}-${product.id}`} // Changed key format
+              className={`product-item ${isEven ? 'even-item' : 'odd-item'} col-lg-3 col-md-4 col-sm-6 col-12 mb-4`} // Changed classes and added conditional classes
+              data-product-id={product.id} // Added data attribute
+              data-category={product.category} // Added data attribute
               style={{ 
-                opacity: product.inStock ? 1 : 0.6,
-                transition: 'all 0.3s ease',
-                boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
-              }} // Added inline styles
+                animationDelay: `${index * 0.1}s` // Added inline style
+              }}
+              onMouseEnter={() => highlightProduct(product.id)} // Added event handler
             >
-              <div 
-                className="card text-center h-100" 
-                key={product.id}
-                style={{
-                  borderRadius: '8px',
-                  overflow: 'hidden',
-                  backgroundColor: product.featured ? '#ffffd9' : '#ffffff'
-                }} // Added inline styles
-              >
-                <img
-                  className="card-img-top p-3"
-                  src={product.image}
-                  alt="Card"
-                  height={300}
-                  style={{
-                    objectFit: 'contain',
-                    maxHeight: '250px',
-                    filter: product.isNew ? 'none' : 'grayscale(0.2)'
-                  }} // Added inline styles
-                />
-                <div 
-                  className="bad-body"
-                  style={{
-                    padding: '12px 16px',
-                    borderBottom: '1px solid #eaeaea'
-                  }} // Added inline styles
-                >
-                  <h5 
-                    className="bard-title"
-                    style={{
-                      fontSize: '1.1rem',
-                      fontWeight: 600,
-                      color: '#222',
-                      marginBottom: '8px',
-                      textOverflow: 'ellipsis'
-                    }} // Added inline styles
-                  >
-                    {product.title.substring(0, 12)}...
-                  </h5>
-                  <p 
-                    className="cat-text"
-                    style={{
-                      fontSize: '0.9rem',
-                      lineHeight: 1.5,
-                      color: '#666',
-                      marginBottom: '12px'
-                    }} // Added inline styles
-                  >
-                    {product.description.substring(0, 90)}...
-                  </p>
+              {/* Added discount badge conditionally */}
+              {product.discountPercentage > 0 && (
+                <div className="discount-badge">
+                  {product.discountPercentage}% OFF
                 </div>
-                <ul 
-                  className="list-group"
-                  style={{
-                    borderRadius: 0,
-                    borderTop: 'none',
-                    marginBottom: 0
-                  }} // Added inline styles
+              )}
+              
+              <div 
+                className={`card text-center h-100 ${product.featured ? 'featured-card' : ''}`} // Added conditional class
+                key={product.id}
+                role="article" // Added ARIA role
+                tabIndex={0} // Added tabIndex
+              >
+                {/* Added wishlist button */}
+                <button 
+                  type="button"
+                  className="wishlist-btn"
+                  aria-label={`Add ${product.title} to wishlist`}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    toggleWishlist(product.id);
+                  }}
                 >
-                  <li style={{
-                    fontWeight: 'bold',
-                    color: product.onSale ? '#e53935' : '#212121',
-                    padding: '8px 12px',
-                    display: 'flex',
-                    justifyContent: 'center',
-                    alignItems: 'center'
-                  }}>$ {product.price}</li>
-                </ul>
-                <div 
-                  className="bad-body"
-                  style={{
-                    display: 'flex',
-                    justifyContent: 'space-between',
-                    padding: '16px',
-                    backgroundColor: '#f9f9f9'
-                  }} // Added inline styles
-                >
-                  <Link
-                    to={"/product/" + product.id}
-                    className="btn-dark m-1"
-                    style={{
-                      textDecoration: 'none',
-                      padding: '8px 16px',
-                      borderRadius: '4px',
-                      backgroundColor: '#212121',
-                      color: 'white',
-                      fontWeight: 500,
-                      fontSize: '0.9rem',
-                      transition: 'background-color 0.2s'
-                    }} // Added inline styles
-                  >
-                    Buy Now
-                  </Link>
-                  <button
-                    className="btn m-1"
-                    style={{
-                      backgroundColor: '#4CAF50',
-                      color: 'white',
-                      border: 'none',
-                      borderRadius: '4px',
-                      padding: '8px 16px',
-                      cursor: 'pointer',
-                      fontWeight: 500,
-                      fontSize: '0.9rem',
-                      transition: 'background-color 0.2s'
-                    }} // Added inline styles
-                    onClick={() => {
-                      toast.success("Added to cart");
-                      addProduct(product);
+                  <i className="fa fa-heart"></i>
+                </button>
+                
+                <div className="image-container position-relative"> {/* Added wrapper div */}
+                  <img
+                    className={`product-image card-img-top p-3 ${product.isNew ? 'new-product' : ''}`} // Changed class and added conditional class
+                    src={product.image}
+                    alt={`Product: ${product.title}`} // Changed alt text
+                    height={250} // Changed height
+                    width="auto" // Added width
+                    loading="lazy" // Added attribute 
+                    onError={(e) => e.target.src = '/assets/placeholder.jpg'} // Added event handler
+                  />
+                  
+                  {/* Added quick view button */}
+                  <button 
+                    className="quick-view-btn"
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      openQuickView(product);
                     }}
                   >
-                    Add to Cart
+                    Quick View
                   </button>
                 </div>
+                
+                {/* Changed class name completely */}
+                <div className="product-details p-3">
+                  {/* Added category label */}
+                  <span className="category-label">{product.category}</span>
+                  
+                  <h4 className="product-title text-truncate" title={product.title}> {/* Changed tag and class */}
+                    {product.title}
+                  </h4>
+                  
+                  {/* Added rating component */}
+                  <div className="product-rating">
+                    {[1, 2, 3, 4, 5].map(star => (
+                      <span key={star} className={star <= product.rating ? 'star-filled' : 'star-empty'}>
+                        ★
+                      </span>
+                    ))}
+                    <span className="rating-count">({product.ratingCount})</span>
+                  </div>
+                  
+                  <div className="product-description"> {/* Changed wrapper */}
+                    <p className="description-text" title={product.description}> {/* Changed class */}
+                      {product.description.length > 75 ? 
+                        product.description.substring(0, 75) + '...' : 
+                        product.description
+                      } {/* Changed truncation logic */}
+                    </p>
+                  </div>
+                </div>
+                
+                {/* Changed to div from ul and completely restructured */}
+                <div className="product-pricing py-2">
+                  <div className="price-container">
+                    {product.discountPercentage > 0 && (
+                      <span className="original-price">${product.originalPrice.toFixed(2)}</span>
+                    )}
+                    <span className={`current-price ${product.onSale ? 'sale-price' : ''}`}>
+                      ${product.price.toFixed(2)}
+                    </span>
+                  </div>
+                  
+                  {/* Added stock indicator */}
+                  <div className={`stock-indicator ${product.inStock ? 'in-stock' : 'out-of-stock'}`}>
+                    {product.inStock ? 'In Stock' : 'Out of Stock'}
+                  </div>
+                </div>
+                
+                {/* Completely restructured action section */}
+                <div className="product-actions d-flex justify-content-between p-3 bg-light">
+                  <Link
+                    to={`/shop/product/${product.id}`} // Changed URL format
+                    className="view-details-btn"
+                    aria-label={`View details for ${product.title}`} // Added ARIA label
+                    onClick={(e) => {
+                      e.stopPropagation();
+                      trackProductClick(product);
+                    }}
+                  >
+                    View Details
+                  </Link>
+                  
+                  <div className="action-buttons">
+                    <button
+                      className={`add-to-cart-btn ${!product.inStock ? 'disabled' : ''}`} // Changed class and added conditional class
+                      disabled={!product.inStock} // Added conditional disable
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        if (product.inStock) {
+                          addToCart(product, 1);
+                          showAddedToCartNotification(product.title);
+                        }
+                      }} // Changed event handler completely
+                      aria-label={`Add ${product.title} to cart`} // Added ARIA label
+                    >
+                      <i className="fa fa-shopping-cart me-2"></i> {/* Added icon */}
+                      {product.inStock ? 'Add to Cart' : 'Sold Out'}
+                    </button>
+                    
+                    {/* Added compare button */}
+                    <button
+                      className="compare-btn"
+                      onClick={(e) => {
+                        e.stopPropagation();
+                        addToCompare(product);
+                      }}
+                      aria-label={`Add ${product.title} to comparison`}
+                    >
+                      <i className="fa fa-exchange"></i>
+                    </button>
+                  </div>
+                </div>
+                
+                {/* Added delivery information */}
+                {product.freeShipping && (
+                  <div className="free-shipping-badge">
+                    Free Shipping
+                  </div>
+                )}
               </div>
-            </div>
+            </article>
           );
         })}
       </>
