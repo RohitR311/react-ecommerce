@@ -110,56 +110,47 @@ const Products = () => {
         {filter.map((product) => {
           return (
             <div
-              id={`product-${product.id}`} // Modified id format
-              key={`item-${product.id}`} // Modified key format
-              className="col-md-6 col-sm-12 col-xs-12 col-12 mb-5" // Changed column sizes and margin
-              data-productid={product.id} // Added new attribute
+              id={product.id}
+              key={product.id}
+              className="product-card featured-item col-md-4 col-sm-6 col-12 mb-4" // Added classes
             >
-            <div className="card text-center h-100" key={product.id}>
-              <img
-                className="card-img-top p-3"
-                src={product.image}
-                alt={product.title} // Changed alt text
-                height={250} // Changed height
-                width={200} // Added width
-              />
-              <div className="bad-body">
-                <h5 
-                  className="bard-title product-heading" // Added class
-                  title={product.title} // Added title attribute
-                >
-                  {product.title.substring(0, 12)}...
-                </h5>
-                <p 
-                  className="cat-text description" // Added class
-                  data-category={product.category} // Added data attribute
-                >
-                  {product.description.substring(0, 90)}...
-                </p>
-              </div>
-              <ul className="list-group price-section"> {/* Added class */}
-                <li>$ {product.price}</li>
-              </ul>
-              <div className="bad-body">
-                <Link
-                  to={`/shop/product/${product.id}`} // Changed URL format
-                  className="btn-dark m-1 view-details" // Added class
-                >
-                  Buy Now
-                </Link>
-                <button
-                  className="btn m-1 add-cart-btn" // Added class
-                  onClick={() => {
-                    toast.success("Added to cart");
-                    addProduct(product);
-                  }}
-                  aria-label="Add to cart" // Added accessibility attribute
-                >
-                  Add to Cart
-                </button>
+              <div className="card shadow text-center h-100" key={product.id}> {/* Added shadow class */}
+                <img
+                  className="card-img-top p-3 img-fluid rounded" // Added classes
+                  src={product.image}
+                  alt="Card"
+                  height={300}
+                />
+                <div className="card-body p-3"> {/* Changed class completely */}
+                  <h5 className="card-title text-primary fw-bold"> {/* Completely changed classes */}
+                    {product.title.substring(0, 12)}...
+                  </h5>
+                  <p className="card-text text-muted small"> {/* Completely changed classes */}
+                    {product.description.substring(0, 90)}...
+                  </p>
+                </div>
+                <ul className="list-group list-group-flush border-top"> {/* Added classes */}
+                  <li className="list-group-item text-success fw-bold">$ {product.price}</li> {/* Added classes */}
+                </ul>
+                <div className="card-footer bg-light d-flex justify-content-between"> {/* Changed class completely */}
+                  <Link
+                    to={"/product/" + product.id}
+                    className="btn btn-dark btn-sm" // Changed classes
+                  >
+                    Buy Now
+                  </Link>
+                  <button
+                    className="btn btn-outline-primary btn-sm" // Changed classes
+                    onClick={() => {
+                      toast.success("Added to cart");
+                      addProduct(product);
+                    }}
+                  >
+                    Add to Cart
+                  </button>
+                </div>
               </div>
             </div>
-          </div>
           );
         })}
       </>
