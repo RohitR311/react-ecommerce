@@ -109,48 +109,57 @@ const Products = () => {
 
         {filter.map((product) => {
           return (
-            <section // Changed from div to section
-              id={product.id}
-              key={product.id}
-              className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
+            <div
+              id={`product-${product.id}`} // Modified id format
+              key={`item-${product.id}`} // Modified key format
+              className="col-md-6 col-sm-12 col-xs-12 col-12 mb-5" // Changed column sizes and margin
+              data-productid={product.id} // Added new attribute
             >
-              <div className="card text-center h-100" key={product.id}>
-                <img
-                  className="card-img-top p-3"
-                  src={product.image}
-                  alt="Card"
-                  height={300}
-                />
-                <div className="bad-body">
-                  <h3 className="bard-title"> {/* Changed from h5 to h3 */}
-                    {product.title.substring(0, 12)}...
-                  </h3>
-                  <span className="cat-text"> {/* Changed from p to span */}
-                    {product.description.substring(0, 90)}...
-                  </span>
-                </div>
-                <ul className="list-group">
-                  <li>$ {product.price}</li>
-                </ul>
-                <div className="bad-body">
-                  <Link
-                    to={"/product/" + product.id}
-                    className="btn-dark m-1"
-                  >
-                    Buy Now
-                  </Link>
-                  <button
-                    className="btn m-1"
-                    onClick={() => {
-                      toast.success("Added to cart");
-                      addProduct(product);
-                    }}
-                  >
-                    Add to Cart
-                  </button>
-                </div>
+            <div className="card text-center h-100" key={product.id}>
+              <img
+                className="card-img-top p-3"
+                src={product.image}
+                alt={product.title} // Changed alt text
+                height={250} // Changed height
+                width={200} // Added width
+              />
+              <div className="bad-body">
+                <h5 
+                  className="bard-title product-heading" // Added class
+                  title={product.title} // Added title attribute
+                >
+                  {product.title.substring(0, 12)}...
+                </h5>
+                <p 
+                  className="cat-text description" // Added class
+                  data-category={product.category} // Added data attribute
+                >
+                  {product.description.substring(0, 90)}...
+                </p>
               </div>
-            </section>
+              <ul className="list-group price-section"> {/* Added class */}
+                <li>$ {product.price}</li>
+              </ul>
+              <div className="bad-body">
+                <Link
+                  to={`/shop/product/${product.id}`} // Changed URL format
+                  className="btn-dark m-1 view-details" // Added class
+                >
+                  Buy Now
+                </Link>
+                <button
+                  className="btn m-1 add-cart-btn" // Added class
+                  onClick={() => {
+                    toast.success("Added to cart");
+                    addProduct(product);
+                  }}
+                  aria-label="Add to cart" // Added accessibility attribute
+                >
+                  Add to Cart
+                </button>
+              </div>
+            </div>
+          </div>
           );
         })}
       </>
