@@ -113,62 +113,118 @@ const Products = () => {
               id={product.id}
               key={product.id}
               className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
+              style={{ 
+                opacity: product.inStock ? 1 : 0.6,
+                transition: 'all 0.3s ease',
+                boxShadow: '0 4px 8px rgba(0,0,0,0.1)'
+              }} // Added inline styles
             >
-              {/* Added badge element */}
-              {product.isNew && <span className="badge bg-success position-absolute top-0 end-0 m-2">New</span>}
-              
-              <div className="card text-center h-100" key={product.id}>
-                {/* Added favorite button */}
-                <button className="btn-favorite position-absolute top-0 start-0 m-2">
-                  <i className="fa fa-heart"></i>
-                </button>
-                
+              <div 
+                className="card text-center h-100" 
+                key={product.id}
+                style={{
+                  borderRadius: '8px',
+                  overflow: 'hidden',
+                  backgroundColor: product.featured ? '#ffffd9' : '#ffffff'
+                }} // Added inline styles
+              >
                 <img
                   className="card-img-top p-3"
                   src={product.image}
                   alt="Card"
                   height={300}
+                  style={{
+                    objectFit: 'contain',
+                    maxHeight: '250px',
+                    filter: product.isNew ? 'none' : 'grayscale(0.2)'
+                  }} // Added inline styles
                 />
-                
-                {/* Added rating stars */}
-                <div className="rating mb-2">
-                  <span className="star">★</span>
-                  <span className="star">★</span>
-                  <span className="star">★</span>
-                  <span className="star">★</span>
-                  <span className="star-empty">☆</span>
-                  <span className="rating-count">(42)</span>
-                </div>
-                
-                <div className="bad-body">
-                  <h5 className="bard-title">
+                <div 
+                  className="bad-body"
+                  style={{
+                    padding: '12px 16px',
+                    borderBottom: '1px solid #eaeaea'
+                  }} // Added inline styles
+                >
+                  <h5 
+                    className="bard-title"
+                    style={{
+                      fontSize: '1.1rem',
+                      fontWeight: 600,
+                      color: '#222',
+                      marginBottom: '8px',
+                      textOverflow: 'ellipsis'
+                    }} // Added inline styles
+                  >
                     {product.title.substring(0, 12)}...
-                    {/* Added tooltip */}
-                    <span className="tooltip-icon ms-1" title={product.title}>ⓘ</span>
                   </h5>
-                  <p className="cat-text">
+                  <p 
+                    className="cat-text"
+                    style={{
+                      fontSize: '0.9rem',
+                      lineHeight: 1.5,
+                      color: '#666',
+                      marginBottom: '12px'
+                    }} // Added inline styles
+                  >
                     {product.description.substring(0, 90)}...
                   </p>
-                  
-                  {/* Added category tag */}
-                  <span className="category-tag">{product.category}</span>
                 </div>
-                
-                <ul className="list-group">
-                  <li>$ {product.price}</li>
-                  {/* Removed commented list items, added actual discount item */}
-                  <li className="list-group-item text-danger">Save 15%</li>
+                <ul 
+                  className="list-group"
+                  style={{
+                    borderRadius: 0,
+                    borderTop: 'none',
+                    marginBottom: 0
+                  }} // Added inline styles
+                >
+                  <li style={{
+                    fontWeight: 'bold',
+                    color: product.onSale ? '#e53935' : '#212121',
+                    padding: '8px 12px',
+                    display: 'flex',
+                    justifyContent: 'center',
+                    alignItems: 'center'
+                  }}>$ {product.price}</li>
                 </ul>
-                
-                <div className="bad-body">
+                <div 
+                  className="bad-body"
+                  style={{
+                    display: 'flex',
+                    justifyContent: 'space-between',
+                    padding: '16px',
+                    backgroundColor: '#f9f9f9'
+                  }} // Added inline styles
+                >
                   <Link
                     to={"/product/" + product.id}
                     className="btn-dark m-1"
+                    style={{
+                      textDecoration: 'none',
+                      padding: '8px 16px',
+                      borderRadius: '4px',
+                      backgroundColor: '#212121',
+                      color: 'white',
+                      fontWeight: 500,
+                      fontSize: '0.9rem',
+                      transition: 'background-color 0.2s'
+                    }} // Added inline styles
                   >
                     Buy Now
                   </Link>
                   <button
                     className="btn m-1"
+                    style={{
+                      backgroundColor: '#4CAF50',
+                      color: 'white',
+                      border: 'none',
+                      borderRadius: '4px',
+                      padding: '8px 16px',
+                      cursor: 'pointer',
+                      fontWeight: 500,
+                      fontSize: '0.9rem',
+                      transition: 'background-color 0.2s'
+                    }} // Added inline styles
                     onClick={() => {
                       toast.success("Added to cart");
                       addProduct(product);
@@ -176,17 +232,6 @@ const Products = () => {
                   >
                     Add to Cart
                   </button>
-                  
-                  {/* Added wishlist button */}
-                  <button className="btn-wishlist m-1">Save for later</button>
-                </div>
-                
-                {/* Added stock indicator */}
-                <div className="stock-status">
-                  {product.inStock ? 
-                    <span className="in-stock">In Stock</span> : 
-                    <span className="out-of-stock">Out of Stock</span>
-                  }
                 </div>
               </div>
             </div>
