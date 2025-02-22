@@ -122,29 +122,28 @@ const Products = () => {
                   height={300}
                 />
                 <div className="bad-body">
-                  {/* Changed h5.bard-title to h5.product-title */}
-                  <h5 className="product-title">
+                  <h5 className="bard-title">
                     {product.title.substring(0, 12)}...
                   </h5>
-                  {/* Changed p.cat-text to p.product-description */}
-                  <p className="product-description">
+                  <p className="cat-text">
                     {product.description.substring(0, 90)}...
                   </p>
                 </div>
                 <ul className="list-group">
                   <li>${product.price}</li>
+                  {/* Added additional list items that were previously commented out */}
+                  <li className="list-group-item">Dapibus ac facilisis in</li>
+                  <li className="list-group-item">Vestibulum at eros</li>
                 </ul>
                 <div className="bad-body">
-                  {/* Changed a.btn-dark.m-1 to a.buy-button */}
                   <Link
                     to={"/product/" + product.id}
-                    className="buy-button"
+                    className="btn-dark m-1"
                   >
                     Buy Now
                   </Link>
-                  {/* Changed button.btn.m-1 to button.cart-button */}
                   <button
-                    className="cart-button"
+                    className="btn m-1"
                     onClick={() => {
                       toast.success("Added to cart");
                       addProduct(product);
