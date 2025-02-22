@@ -121,7 +121,7 @@ const Products = () => {
                   alt="Card"
                   height={300}
                 />
-                <div className="bad-body">
+                <div className="good-body">
                   <h5 className="bard-title">
                     {product.title.substring(0, 12)}...
                   </h5>
@@ -134,7 +134,7 @@ const Products = () => {
                   {/* <li className="list-group-item">Dapibus ac facilisis in</li>
                     <li className="list-group-item">Vestibulum at eros</li> */}
                 </ul>
-                <div className="bad-body">
+                <div className="good-body">
                   <Link
                     to={"/product/" + product.id}
                     className="btn-dark m-1"
