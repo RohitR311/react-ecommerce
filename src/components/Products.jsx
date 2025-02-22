@@ -107,168 +107,52 @@ const Products = () => {
           </button>
         </div>
 
-        {filter.map((product, index) => {
-          const isEven = index % 2 === 0;
+        {filter.map((product) => {
           return (
-            <article // Changed from div to article
-              id={`product-card-${product.id}`} // Changed id format
-              key={`${product.category}-${product.id}`} // Changed key format
-              className={`product-item ${isEven ? 'even-item' : 'odd-item'} col-lg-3 col-md-4 col-sm-6 col-12 mb-4`} // Changed classes and added conditional classes
-              data-product-id={product.id} // Added data attribute
-              data-category={product.category} // Added data attribute
-              style={{ 
-                animationDelay: `${index * 0.1}s` // Added inline style
-              }}
-              onMouseEnter={() => highlightProduct(product.id)} // Added event handler
+            <div
+              id={product.id}
+              key={product.id}
+              className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
             >
-              {/* Added discount badge conditionally */}
-              {product.discountPercentage > 0 && (
-                <div className="discount-badge">
-                  {product.discountPercentage}% OFF
+              <div className="card text-center h-100" key={product.id}>
+                <img
+                  className="card-img-top p-3"
+                  src={product.image}
+                  alt="Card"
+                  height={300}
+                />
+                <div className="bad-body">
+                  <h5 className="bard-title">
+                    {product.title.substring(0, 12)}...
+                  </h5>
+                  <p className="cat-text">
+                    {product.description.substring(0, 90)}...
+                  </p>
                 </div>
-              )}
-              
-              <div 
-                className={`card text-center h-100 ${product.featured ? 'featured-card' : ''}`} // Added conditional class
-                key={product.id}
-                role="article" // Added ARIA role
-                tabIndex={0} // Added tabIndex
-              >
-                {/* Added wishlist button */}
-                <button 
-                  type="button"
-                  className="wishlist-btn"
-                  aria-label={`Add ${product.title} to wishlist`}
-                  onClick={(e) => {
-                    e.stopPropagation();
-                    toggleWishlist(product.id);
-                  }}
-                >
-                  <i className="fa fa-heart"></i>
-                </button>
-                
-                <div className="image-container position-relative"> {/* Added wrapper div */}
-                  <img
-                    className={`product-image card-img-top p-3 ${product.isNew ? 'new-product' : ''}`} // Changed class and added conditional class
-                    src={product.image}
-                    alt={`Product: ${product.title}`} // Changed alt text
-                    height={250} // Changed height
-                    width="auto" // Added width
-                    loading="lazy" // Added attribute 
-                    onError={(e) => e.target.src = '/assets/placeholder.jpg'} // Added event handler
-                  />
-                  
-                  {/* Added quick view button */}
-                  <button 
-                    className="quick-view-btn"
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      openQuickView(product);
+                <ul className="list-group">
+                  <li>$ {product.price}</li>
+                  {/* <li className="list-group-item">Dapibus ac facilisis in</li>
+                    <li className="list-group-item">Vestibulum at eros</li> */}
+                </ul>
+                <div className="bad-body">
+                  <Link
+                    to={"/product/" + product.id}
+                    className="btn-dark m-1"
+                  >
+                    Buy Now
+                  </Link>
+                  <button
+                    className="btn m-1"
+                    onClick={() => {
+                      toast.success("Added to cart");
+                      addProduct(product);
                     }}
                   >
-                    Quick View
+                    Add to Cart
                   </button>
                 </div>
-                
-                {/* Changed class name completely */}
-                <div className="product-details p-3">
-                  {/* Added category label */}
-                  <span className="category-label">{product.category}</span>
-                  
-                  <h4 className="product-title text-truncate" title={product.title}> {/* Changed tag and class */}
-                    {product.title}
-                  </h4>
-                  
-                  {/* Added rating component */}
-                  <div className="product-rating">
-                    {[1, 2, 3, 4, 5].map(star => (
-                      <span key={star} className={star <= product.rating ? 'star-filled' : 'star-empty'}>
-                        ★
-                      </span>
-                    ))}
-                    <span className="rating-count">({product.ratingCount})</span>
-                  </div>
-                  
-                  <div className="product-description"> {/* Changed wrapper */}
-                    <p className="description-text" title={product.description}> {/* Changed class */}
-                      {product.description.length > 75 ? 
-                        product.description.substring(0, 75) + '...' : 
-                        product.description
-                      } {/* Changed truncation logic */}
-                    </p>
-                  </div>
-                </div>
-                
-                {/* Changed to div from ul and completely restructured */}
-                <div className="product-pricing py-2">
-                  <div className="price-container">
-                    {product.discountPercentage > 0 && (
-                      <span className="original-price">${product.originalPrice.toFixed(2)}</span>
-                    )}
-                    <span className={`current-price ${product.onSale ? 'sale-price' : ''}`}>
-                      ${product.price.toFixed(2)}
-                    </span>
-                  </div>
-                  
-                  {/* Added stock indicator */}
-                  <div className={`stock-indicator ${product.inStock ? 'in-stock' : 'out-of-stock'}`}>
-                    {product.inStock ? 'In Stock' : 'Out of Stock'}
-                  </div>
-                </div>
-                
-                {/* Completely restructured action section */}
-                <div className="product-actions d-flex justify-content-between p-3 bg-light">
-                  <Link
-                    to={`/shop/product/${product.id}`} // Changed URL format
-                    className="view-details-btn"
-                    aria-label={`View details for ${product.title}`} // Added ARIA label
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      trackProductClick(product);
-                    }}
-                  >
-                    View Details
-                  </Link>
-                  
-                  <div className="action-buttons">
-                    <button
-                      className={`add-to-cart-btn ${!product.inStock ? 'disabled' : ''}`} // Changed class and added conditional class
-                      disabled={!product.inStock} // Added conditional disable
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        if (product.inStock) {
-                          addToCart(product, 1);
-                          showAddedToCartNotification(product.title);
-                        }
-                      }} // Changed event handler completely
-                      aria-label={`Add ${product.title} to cart`} // Added ARIA label
-                    >
-                      <i className="fa fa-shopping-cart me-2"></i> {/* Added icon */}
-                      {product.inStock ? 'Add to Cart' : 'Sold Out'}
-                    </button>
-                    
-                    {/* Added compare button */}
-                    <button
-                      className="compare-btn"
-                      onClick={(e) => {
-                        e.stopPropagation();
-                        addToCompare(product);
-                      }}
-                      aria-label={`Add ${product.title} to comparison`}
-                    >
-                      <i className="fa fa-exchange"></i>
-                    </button>
-                  </div>
-                </div>
-                
-                {/* Added delivery information */}
-                {product.freeShipping && (
-                  <div className="free-shipping-badge">
-                    Free Shipping
-                  </div>
-                )}
               </div>
-            </article>
+            </div>
           );
         })}
       </>
