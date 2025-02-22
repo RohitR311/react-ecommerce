@@ -130,10 +130,9 @@ const Products = () => {
                   </p>
                 </div>
                 <ul className="list-group">
-                  <li>${product.price}</li>
-                  {/* Added additional list items that were previously commented out */}
-                  <li className="list-group-item">Dapibus ac facilisis in</li>
-                  <li className="list-group-item">Vestibulum at eros</li>
+                  <li>$ {product.price}</li>
+                  {/* <li className="list-group-item">Dapibus ac facilisis in</li>
+                    <li className="list-group-item">Vestibulum at eros</li> */}
                 </ul>
                 <div className="bad-body">
                   <Link
