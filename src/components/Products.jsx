@@ -112,8 +112,7 @@ const Products = () => {
             <div
               id={product.id}
               key={product.id}
-              // Changed class from "col-md-4 col-sm-6 col-xs-8 col-12 mb-4" to "product-card col-md-4 col-sm-6 col-12 mb-4"
-              className="product-card col-md-4 col-sm-6 col-12 mb-4"
+              className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
             >
               <div className="card text-center h-100" key={product.id}>
                 <img
@@ -122,10 +121,13 @@ const Products = () => {
                   alt="Card"
                   height={300}
                 />
-                <div className="bad-body">
+                {/* Changed div.bad-body to div.product-info */}
+                <div className="product-info">
+                  {/* Same h5.bard-title but under different parent */}
                   <h5 className="bard-title">
                     {product.title.substring(0, 12)}...
                   </h5>
+                  {/* Same p.cat-text but under different parent */}
                   <p className="cat-text">
                     {product.description.substring(0, 90)}...
                   </p>
@@ -133,13 +135,16 @@ const Products = () => {
                 <ul className="list-group">
                   <li>${product.price}</li>
                 </ul>
-                <div className="bad-body">
+                {/* Changed div.bad-body to div.action-buttons */}
+                <div className="action-buttons">
+                  {/* Same a.btn-dark.m-1 but under different parent */}
                   <Link
                     to={"/product/" + product.id}
                     className="btn-dark m-1"
                   >
                     Buy Now
                   </Link>
+                  {/* Same button.btn.m-1 but under different parent */}
                   <button
                     className="btn m-1"
                     onClick={() => {
