@@ -121,32 +121,30 @@ const Products = () => {
                   alt="Card"
                   height={300}
                 />
-                {/* Changed div.bad-body to div.product-info */}
-                <div className="product-info">
-                  {/* Same h5.bard-title but under different parent */}
-                  <h5 className="bard-title">
+                <div className="bad-body">
+                  {/* Changed h5.bard-title to h5.product-title */}
+                  <h5 className="product-title">
                     {product.title.substring(0, 12)}...
                   </h5>
-                  {/* Same p.cat-text but under different parent */}
-                  <p className="cat-text">
+                  {/* Changed p.cat-text to p.product-description */}
+                  <p className="product-description">
                     {product.description.substring(0, 90)}...
                   </p>
                 </div>
                 <ul className="list-group">
                   <li>${product.price}</li>
                 </ul>
-                {/* Changed div.bad-body to div.action-buttons */}
-                <div className="action-buttons">
-                  {/* Same a.btn-dark.m-1 but under different parent */}
+                <div className="bad-body">
+                  {/* Changed a.btn-dark.m-1 to a.buy-button */}
                   <Link
                     to={"/product/" + product.id}
-                    className="btn-dark m-1"
+                    className="buy-button"
                   >
                     Buy Now
                   </Link>
-                  {/* Same button.btn.m-1 but under different parent */}
+                  {/* Changed button.btn.m-1 to button.cart-button */}
                   <button
-                    className="btn m-1"
+                    className="cart-button"
                     onClick={() => {
                       toast.success("Added to cart");
                       addProduct(product);
