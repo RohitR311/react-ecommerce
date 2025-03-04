@@ -121,28 +121,28 @@ const Products = () => {
                   alt="Card"
                   height={300}
                 />
-                <div className="good-body">
-                  <h5 className="bard-title">
+                <div className="card-body">
+                  <h5 className="card-title">
                     {product.title.substring(0, 12)}...
                   </h5>
-                  <p className="cat-text">
+                  <p className="card-text">
                     {product.description.substring(0, 90)}...
                   </p>
                 </div>
-                <ul className="list-group">
-                  <li>$ {product.price}</li>
+                <ul className="list-group list-group-flush">
+                  <li className="list-group-item lead">$ {product.price}</li>
                   {/* <li className="list-group-item">Dapibus ac facilisis in</li>
                     <li className="list-group-item">Vestibulum at eros</li> */}
                 </ul>
-                <div className="good-body">
+                <div className="card-body">
                   <Link
                     to={"/product/" + product.id}
-                    className="btn-dark m-1"
+                    className="btn btn-dark m-1"
                   >
                     Buy Now
                   </Link>
                   <button
-                    className="btn m-1"
+                    className="btn btn-dark m-1"
                     onClick={() => {
                       toast.success("Added to cart");
                       addProduct(product);
@@ -161,13 +161,13 @@ const Products = () => {
   return (
     <>
       <div className="container my-3 py-3">
-        <div className="bro">
+        <div className="row">
           <div className="col-12">
-            <h1 className="display-5 text-center">Latest Products</h1>
+            <h2 className="display-5 text-center">Latest Products</h2>
             <hr />
           </div>
         </div>
-        <div className="bro">
+        <div className="row justify-content-center">
           {loading ? <Loading /> : <ShowProducts />}
         </div>
       </div>
