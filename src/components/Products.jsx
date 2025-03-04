@@ -167,7 +167,7 @@ const Products = () => {
             <hr />
           </div>
         </div>
-        <div>
+        <div className="row justify-content-center">
           {loading ? <Loading /> : <ShowProducts />}
         </div>
       </div>
