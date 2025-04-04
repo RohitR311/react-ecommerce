@@ -114,14 +114,14 @@ const Products = () => {
               key={product.id}
               className="col-md-4 col-sm-6 col-xs-8 col-12 mb-4"
             >
-              <div className="card text-center h-100" key={product.id}>
+              <div className="card h-100" key={product.id}>
                 <img
                   className="card-img-top p-3"
                   src={product.image}
                   alt="Card"
                   height={300}
                 />
-                <div className="card-body">
+                <div className="bad-body text-dark">
                   <h5 className="card-title">
                     {product.title.substring(0, 12)}...
                   </h5>
